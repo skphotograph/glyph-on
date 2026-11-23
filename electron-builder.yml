@@ -1,0 +1,45 @@
+appId: com.skphotograph.glyphon
+productName: Glyph-on
+directories:
+  output: dist
+  buildResources: build
+files:
+  - src/**
+  - package.json
+  - LICENSE
+  - PRIVACY.md
+  - THIRD-PARTY.md
+asar: true
+npmRebuild: false
+forceCodeSigning: true
+afterSign: build/verify-release.cjs
+publish:
+  provider: github
+  owner: skphotograph
+  repo: glyph-on
+  releaseType: draft
+win:
+  icon: build/icon.ico
+  target: nsis
+  requestedExecutionLevel: asInvoker
+  verifyUpdateCodeSignature: true
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: false
+  installerLanguages:
+    - en_US
+    - ja_JP
+  createDesktopShortcut: false
+  deleteAppDataOnUninstall: false
+  include: build/installer.nsh
+mac:
+  icon: build/icon.png
+  target:
+    - dmg
+    - zip
+  category: public.app-category.utilities
+  hardenedRuntime: true
+  notarize: true
+  extendInfo:
+    LSUIElement: true
